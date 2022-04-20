@@ -1,6 +1,6 @@
-import { StyleSheet, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, Button, TextInput, Modal } from 'react-native';
 
-export default function GoalInput({ enteredGoalText, setEnteredGoalText, setEnteredGoalArray }) {
+export default function GoalInput({ enteredGoalText, setEnteredGoalText, setEnteredGoalArray, modalIsVisible }) {
     function goalInputHandler(enteredText) {
         setEnteredGoalText(enteredText)
     }
@@ -9,15 +9,17 @@ export default function GoalInput({ enteredGoalText, setEnteredGoalText, setEnte
         setEnteredGoalText('')
     }
     return (
-        <View style={styles.inputContainer}>
-            <TextInput
-                style={styles.textInput}
-                placeholder='Your Course Goal'
-                onChangeText={goalInputHandler}
-                value={enteredGoalText}
-            />
-            <Button title='Add Goal' onPress={addGoalHandler} />
-        </View>
+        <Modal visible={modalIsVisible} animationType="slide">
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Your Course Goal'
+                    onChangeText={goalInputHandler}
+                    value={enteredGoalText}
+                />
+                <Button title='Add Goal' onPress={addGoalHandler} />
+            </View>
+        </Modal>
     )
 }
 
