@@ -9,7 +9,6 @@ export default function App() {
   }
   function addGoalHandler() {
     setEnteredGoalArray(prevState => [...prevState, enteredGoalText])
-    console.log(enteredGoalArray)
   }
   return (
     <View style={styles.appContainer}>
@@ -23,8 +22,11 @@ export default function App() {
       </View>
       <View style={styles.goalsContainer}>
         {enteredGoalArray.map((goal, id) =>
-          <Text key={id}>{goal}</Text>
+          <View style={styles.textOutput} key={id}>
+            <Text style={{ color: 'white', }}>{goal}</Text>
+          </View>
         )}
+
 
       </View>
     </View>
@@ -54,5 +56,11 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 4
+  },
+  textOutput: {
+    margin: 8,
+    padding: 8,
+    backgroundColor: '#5e0acc',
+    borderRadius: 6,
   }
 });
