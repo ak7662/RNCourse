@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, FlatList, Button } from 'react-native';
 import GoalInput from './components/goalInput';
 import GoalItem from './components/goalItem';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false)
@@ -15,26 +16,29 @@ export default function App() {
     setModalIsVisible(true)
   }
   return (
-    <View style={styles.appContainer}>
-      <Button title='Add New Goal' color={'#5e0acc'} onPress={startAddGoalHandler} />
-      {modalIsVisible && <GoalInput modalIsVisible={modalIsVisible} enteredGoalText={enteredGoalText} setEnteredGoalText={setEnteredGoalText} setEnteredGoalArray={setEnteredGoalArray} />}
-      <View style={styles.goalsContainer}>
-        <FlatList data={enteredGoalArray} renderItem={(itemData) => {
-          return (
-            <GoalItem itemData={itemData} deleteGoalHandler={deleteGoalHandler} />
-          )
-        }}
-          keyExtractor={(item, index) => item.id}
-        />
+    <>
+      <StatusBar style='light' />
+      <View style={styles.appContainer}>
+        <Button title='Add New Goal' color={'#aaa'} onPress={startAddGoalHandler} />
+        {modalIsVisible && <GoalInput setModalIsVisible={setModalIsVisible} modalIsVisible={modalIsVisible} enteredGoalText={enteredGoalText} setEnteredGoalText={setEnteredGoalText} setEnteredGoalArray={setEnteredGoalArray} />}
+        <View style={styles.goalsContainer}>
+          <FlatList data={enteredGoalArray} renderItem={(itemData) => {
+            return (
+              <GoalItem itemData={itemData} deleteGoalHandler={deleteGoalHandler} />
+            )
+          }}
+            keyExtractor={(item, index) => item.id}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    padding: 50
+    padding: 50,
   },
   goalsContainer: {
     flex: 4
