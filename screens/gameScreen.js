@@ -1,10 +1,11 @@
 import { View, StyleSheet, Text } from "react-native"
+import Title from "../components/title"
 
 
 export default function GameScreen() {
     return (
         <View style={styles.screen}>
-            <Text>Oponent's Guess</Text>
+            <Title>Oponent's Guess</Title>
             {/* GUESS */}
             <View>
                 <Text>Higher or Lower</Text>
