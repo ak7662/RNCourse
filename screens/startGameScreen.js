@@ -16,7 +16,6 @@ export default function StartGameScreen({ pickedNumberHandler }) {
     }
     function confirmInputHandler() {
         const chosenNumber = parseInt(enteredValue)
-        // console.log(enteredValue)
 
         if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
             //show alert

@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons'
 import { View, StyleSheet, Text, Alert } from "react-native"
 import Title from "../components/ui/title"
 import { useState, useEffect } from 'react'
@@ -5,6 +6,7 @@ import NumberContainer from "../components/game/numberContainer"
 import PrimaryButton from "../components/ui/primaryButton"
 import Card from "../components/ui/card"
 import InstructionText from "../components/ui/instructionText"
+import colors from '../constants/colors'
 
 
 let minBoundary = 1
@@ -42,23 +44,27 @@ export default function GameScreen({ userNumber, onGameOver }) {
         } else {
             minBoundary = currentGuess + 1
         }
-        console.log(minBoundary, maxBoundary)
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
         setCurrentGuess(newRndNumber)
     }
     return (
         <View style={styles.screen}>
             <Title>Oponent's Guess</Title>
-            {/* GUESS */}
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card>
-                <InstructionText>Higher or Lower</InstructionText>
-                <View style={styles.buttonContainer}>
-                    <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
-                    <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
+                <InstructionText style={styles.instructionText}>Higher or Lower</InstructionText>
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                            <Ionicons name='md-remove' size={24} color={colors.light500} />
+                        </PrimaryButton>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                            <Ionicons name='md-add' size={24} color={colors.light500} />
+                        </PrimaryButton>
+                    </View>
                 </View>
-
-                {/* +- */}
             </Card>
             {/* <View>LOG ROUNDS</View> */}
         </View>
@@ -70,7 +76,13 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 40
     },
-    buttonContainer: {
+    buttonsContainer: {
         flexDirection: 'row'
+    },
+    buttonContainer: {
+        flex: 1
+    },
+    instructionText: {
+        marginBottom: 12
     }
 })
